@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMIQ — Every response has a story.</title>
+  <meta name="description" content="An immersive cinematic product experience for FormIQ. From questions to decisions." />
+
+  <!-- Premium Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cinema-body">
+
+  <!-- Permanent WebGL Canvas Layer -->
+  <canvas id="webgl-canvas" class="webgl-canvas"></canvas>
+
+  <!-- Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Minimalist Cinematic Telemetry HUD (Appears softly after Scene 01) -->
+  <nav class="cinema-hud" id="cinema-hud">
+    <div class="hud-brand">
+      <span class="hud-monogram">FORMIQ</span>
+      <span class="hud-tagline-micro">Every response has a story.</span>
+    </div>
+
+    <div class="hud-timeline">
+      <div class="hud-track">
+        <div class="hud-thumb" id="hud-progress-bar"></div>
+      </div>
+      <div class="hud-meta">
+        <span class="hud-scene-index" id="hud-scene-index">01</span>
+        <span class="hud-sep">/</span>
+        <span class="hud-scene-total">12</span>
+        <span class="hud-scene-name" id="hud-scene-name">THE VOID</span>
+      </div>
+    </div>
+
+    <div class="hud-tools">
+      <!-- Real-time Web Audio Visualizer -->
+      <canvas id="audio-visualizer-canvas" class="audio-vis-canvas" width="64" height="20" title="Spatial Audio Visualizer"></canvas>
+
+      <button class="hud-audio-btn" id="audio-toggle" title="Toggle Spatial Audio Feedback" aria-label="Audio">
+        <span class="audio-wave-bar"></span>
+        <span class="audio-wave-bar"></span>
+        <span class="audio-wave-bar"></span>
+        <span class="audio-status-label" id="audio-label">Sound Off</span>
+      </button>
+
+      <button class="hud-fullscreen-btn" id="fs-toggle" title="Cinematic Fullscreen" aria-label="Fullscreen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Cinematic Sound Onboarding Banner (Discreet pill at bottom-right) -->
+  <div class="audio-onboarding-pill" id="audio-prompt-pill">
+    <div class="pill-sparkle">✦</div>
+    <div class="pill-text">
+      <strong>Cinematic Spatial Audio</strong>
+      <span>Enable full film soundscape</span>
+    </div>
+    <button class="pill-enable-btn" id="pill-enable-btn">
+      <span>Turn On</span>
+    </button>
+    <button class="pill-dismiss-btn" id="pill-dismiss-btn" title="Dismiss">✕</button>
+  </div>
+
+  <!-- Keyboard & Scroll Indicator -->
+  <div class="scroll-prompt" id="scroll-prompt">
+    <span class="prompt-text">Scroll or <kbd>↓</kbd> to explore</span>
+    <div class="prompt-line"><div class="prompt-glow"></div></div>
+  </div>
+
+  <!-- =========================================================================
+       THE 12 CONTINUOUS CINEMATIC SCENES
+       ========================================================================= -->
+  <main class="cinema-container" id="cinema-container">
+
+    <!-- SCENE 01 — THE VOID -->
+    <section class="scene-frame scene-01" id="scene-1" data-scene="1" data-title="THE VOID">
+      <div class="scene-inner void-center">
+        <div class="light-singularity" id="singularity"></div>
+        
+        <div class="void-typography">
+          <p class="void-question" id="void-q1">
+            <span class="type-char">W</span><span class="type-char">H</span><span class="type-char">A</span><span class="type-char">T</span>
+            <span class="type-space"> </span>
+            <span class="type-char">H</span><span class="type-char">A</span><span class="type-char">P</span><span class="type-char">P</span><span class="type-char">E</span><span class="type-char">N</span><span class="type-char">S</span>
+            <br />
+            <span class="type-char">A</span><span class="type-char">F</span><span class="type-char">T</span><span class="type-char">E</span><span class="type-char">R</span>
+            <span class="type-space"> </span>
+            <span class="type-char">Y</span><span class="type-char">O</span><span class="type-char">U</span>
+            <span class="type-space"> </span>
+            <span class="type-char">A</span><span class="type-char">S</span><span class="type-char">K</span><span class="type-char">?</span>
+          </p>
+
+          <p class="void-answer" id="void-q2">
+            YOU GET RESPONSES.
+          </p>
+
+          <div class="brand-emergence" id="brand-emergence">
+            <h1 class="brand-monumental">FORMIQ</h1>
+            <p class="brand-tagline">“Every response has a story.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 02 — THE CHAOS OF RESPONSES -->
+    <section class="scene-frame scene-02" id="scene-2" data-scene="2" data-title="THE CHAOS">
+      <div class="scene-inner chaos-inner">
+        <div class="chaos-headline-wrap">
+          <h2 class="editorial-statement">
+            WE COLLECT.<br />
+            WE STORE.<br />
+            <span class="highlight-dim">WE FORGET TO UNDERSTAND.</span>
+          </h2>
+          <p class="chaos-sub">
+            Thousands of disparate fragments scattered across spreadsheets, surveys, and support channels.
+          </p>
+        </div>
+
+        <!-- 3D Response Floating Clouds (Layered with WebGL Particles) -->
+        <div class="spatial-fragments-layer" id="fragments-layer">
+          <div class="frag-chip frag-1" data-depth="0.2">“Very satisfied”</div>
+          <div class="frag-chip frag-2" data-depth="0.7">“Needs improvement”</div>
+          <div class="frag-chip frag-3" data-depth="0.4">“Too expensive”</div>
+          <div class="frag-chip frag-4" data-depth="0.9">“Lab infrastructure”</div>
+          <div class="frag-chip frag-5" data-depth="0.3">“Communication breakdown”</div>
+          <div class="frag-chip frag-6" data-depth="0.6">“Great experience”</div>
+          <div class="frag-chip frag-7" data-depth="0.5">“Not enough resources”</div>
+          <div class="frag-chip frag-8" data-depth="0.8">“Scheduling overlap”</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 03 — FORM -->
+    <section class="scene-frame scene-03" id="scene-3" data-scene="3" data-title="FORM">
+      <div class="scene-inner form-inner">
+        <div class="scene-header-minimal">
+          <span class="scene-category-pill">STAGE 01 / GENERATION</span>
+          <h2 class="scene-editorial-title">
+            DESCRIBE WHAT YOU<br />
+            WANT TO KNOW.
+          </h2>
+        </div>
+
+        <!-- Interactive 3D Form Card Interface -->
+        <div class="form-canvas-stage">
+          <div class="ai-prompt-capsule">
+            <div class="capsule-prefix">
+              <span class="prompt-pulse"></span>
+              <span>NATURAL LANGUAGE INTENT</span>
+            </div>
+            <div class="prompt-stream" id="prompt-stream">
+              <span class="prompt-text-live" id="prompt-text-live"></span>
+              <span class="prompt-cursor">|</span>
+            </div>
+          </div>
+
+          <!-- Generated Form Object Floating in 3D -->
+          <div class="floating-form-object" id="floating-form">
+            <div class="form-obj-header">
+              <div class="obj-dot"></div>
+              <span class="obj-title">GENERATED QUESTIONNAIRE · FACILITY INTELLIGENCE</span>
+              <span class="obj-status">READY</span>
+            </div>
+            
+            <div class="form-obj-body">
+              <div class="form-question-card" data-q="1">
+                <span class="q-label">01. DEMOGRAPHIC COHORT</span>
+                <p class="q-title">Select your current academic cohort or tier</p>
+                <div class="q-options-row">
+                  <span class="opt-pill active">Year 1 Foundational</span>
+                  <span class="opt-pill">Year 2 Core</span>
+                  <span class="opt-pill">Upper Division</span>
+                </div>
+              </div>
+
+              <div class="form-question-card" data-q="2">
+                <span class="q-label">02. RESOURCE SATISFACTION</span>
+                <p class="q-title">Rate laboratory workstation availability during scheduled practicals</p>
+                <div class="q-scale-bar">
+                  <div class="scale-point">1</div>
+                  <div class="scale-point">2</div>
+                  <div class="scale-point selected">3</div>
+                  <div class="scale-point">4</div>
+                  <div class="scale-point">5</div>
+                </div>
+              </div>
+
+              <div class="form-question-card" data-q="3">
+                <span class="q-label">03. QUALITATIVE REASONING</span>
+                <p class="q-title">What primary impediment impacts your weekly laboratory performance?</p>
+                <div class="q-input-mock">
+                  <span>“Hardware terminal contention during peak 2 PM sessions...”</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 04 — COLLECT -->
+    <section class="scene-frame scene-04" id="scene-4" data-scene="4" data-title="COLLECT">
+      <div class="scene-inner collect-inner">
+        <div class="collect-counter-wrap">
+          <span class="collect-eyebrow">REAL-TIME INGESTION STREAM</span>
+          
+          <div class="monumental-number" id="collect-counter">
+            <span class="counter-val" id="counter-val">0</span>
+            <span class="counter-suffix">RESPONSES</span>
+          </div>
+
+          <p class="collect-narrative">
+            Forms disperse across hundreds of channels. Responses arrive continuously, validated, tagged, and indexed as a unified living stream.
+          </p>
+
+          <div class="stream-telemetry-strip">
+            <div class="stream-stat">
+              <span class="stat-k">INGESTION RATE</span>
+              <span class="stat-v">140 / SEC</span>
+            </div>
+            <div class="stream-stat">
+              <span class="stat-k">SCHEMA INTEGRITY</span>
+              <span class="stat-v">100.0%</span>
+            </div>
+            <div class="stream-stat">
+              <span class="stat-k">LATENCY</span>
+              <span class="stat-v">&lt; 12ms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 05 — INTELLIGENCE AWAKENS -->
+    <section class="scene-frame scene-05" id="scene-5" data-scene="5" data-title="INTELLIGENCE">
+      <div class="scene-inner intelligence-inner">
+        <div class="intelligence-header">
+          <h2 class="editorial-statement">
+            PATTERNS ARE HIDDEN IN THE NOISE.<br />
+            <span class="text-electric">FORMIQ FINDS THEM.</span>
+          </h2>
+          <p class="intelligence-lead">
+            An abstract spatial intelligence engine automatically clusters freeform text, reveals sentiment vectors, and maps systemic dependencies.
+          </p>
+        </div>
+
+        <!-- 3D Interactive Clusters View -->
+        <div class="clusters-spatial-stage" id="clusters-stage">
+          <div class="cluster-node c-node-1" data-cluster="infrastructure">
+            <div class="node-ring"></div>
+            <span class="node-label">INFRASTRUCTURE</span>
+            <span class="node-pct">54% Volume</span>
+          </div>
+
+          <div class="cluster-node c-node-2" data-cluster="scheduling">
+            <div class="node-ring"></div>
+            <span class="node-label">SCHEDULING</span>
+            <span class="node-pct">29% Volume</span>
+          </div>
+
+          <div class="cluster-node c-node-3" data-cluster="faculty">
+            <div class="node-ring"></div>
+            <span class="node-label">FACULTY & TAs</span>
+            <span class="node-pct">12% Volume</span>
+          </div>
+
+          <div class="cluster-node c-node-4" data-cluster="resources">
+            <div class="node-ring"></div>
+            <span class="node-label">RESOURCES</span>
+            <span class="node-pct">22% Volume</span>
+          </div>
+
+          <div class="cluster-node c-node-5" data-cluster="experience">
+            <div class="node-ring"></div>
+            <span class="node-label">OVERALL EXPERIENCE</span>
+            <span class="node-pct">Baseline 88%</span>
+          </div>
+
+          <!-- Dynamic Interconnecting Neural Vectors in Canvas / SVG -->
+          <svg class="cluster-svg-vectors" id="cluster-svg" aria-hidden="true"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 06 — INSIGHT -->
+    <section class="scene-frame scene-06" id="scene-6" data-scene="6" data-title="INSIGHT">
+      <div class="scene-inner insight-inner">
+        <div class="negative-space-wrapper">
+          <span class="insight-meta-badge">KEY SYNTHESIZED INSIGHT</span>
+
+          <blockquote class="monumental-insight" id="monumental-insight">
+            “Laboratory infrastructure is the most recurring concern, with dissatisfaction concentrated among first-year students.”
+          </blockquote>
+
+          <div class="insight-lenses-bar">
+            <span class="lenses-label">MULTI-VARIABLE LENSES:</span>
+            <button class="lens-tab active" data-lens="trend">TREND</button>
+            <button class="lens-tab" data-lens="sentiment">SENTIMENT</button>
+            <button class="lens-tab" data-lens="group">GROUP DIFFERENCE</button>
+            <button class="lens-tab" data-lens="issue">RECURRING ISSUE</button>
+          </div>
+
+          <!-- Morphing Visual Canvas for Active Lens -->
+          <div class="lens-visual-display" id="lens-display">
+            <!-- Lens 1: Trend -->
+            <div class="lens-view active" id="view-trend">
+              <div class="trend-curve-mock">
+                <div class="trend-header">
+                  <span>DISCONTENT VELOCITY (LAST 30 DAYS)</span>
+                  <span class="metric-bad">+42% IN PEAK AFTERNOONS</span>
+                </div>
+                <div class="svg-graph-wrap">
+                  <svg viewBox="0 0 800 120" preserveAspectRatio="none" class="graph-svg">
+                    <path d="M0,90 Q200,85 400,60 T800,20" fill="none" stroke="#00f0ff" stroke-width="2"></path>
+                    <path d="M0,90 Q200,85 400,60 T800,20 L800,120 L0,120 Z" fill="rgba(0, 240, 255, 0.05)"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lens 2: Sentiment -->
+            <div class="lens-view" id="view-sentiment">
+              <div class="sentiment-split-bar">
+                <div class="sent-bar sent-neg" style="width: 58%">
+                  <span>58% Frustration / Urgency</span>
+                </div>
+                <div class="sent-bar sent-neu" style="width: 28%">
+                  <span>28% Neutral Feedback</span>
+                </div>
+                <div class="sent-bar sent-pos" style="width: 14%">
+                  <span>14% Positive</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lens 3: Group Difference -->
+            <div class="lens-view" id="view-group">
+              <div class="cohort-disparity-grid">
+                <div class="cohort-cell">
+                  <span class="cohort-title">FIRST-YEAR COHORT</span>
+                  <div class="cohort-stat-val text-alert">79% DISSATISFACTION</div>
+                  <span class="cohort-cause">Under-allocated workstations in 2 PM slots</span>
+                </div>
+                <div class="cohort-cell">
+                  <span class="cohort-title">UPPER-YEAR COHORT</span>
+                  <div class="cohort-stat-val text-good">21% DISSATISFACTION</div>
+                  <span class="cohort-cause">Priority access to dedicated project benches</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lens 4: Recurring Issue -->
+            <div class="lens-view" id="view-issue">
+              <div class="issue-frequency-stack">
+                <div class="issue-item">
+                  <span>1. Hardware terminal contention during foundational sessions</span>
+                  <span class="freq-tag">274 Mentions</span>
+                </div>
+                <div class="issue-item">
+                  <span>2. Lecture schedule overlap with practical lab periods</span>
+                  <span class="freq-tag">145 Mentions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 07 — THE MOMENT OF DECISION -->
+    <section class="scene-frame scene-07" id="scene-7" data-scene="7" data-title="DECISION">
+      <div class="scene-inner decision-inner">
+        <div class="decision-transition-split">
+          <div class="decision-left">
+            <span class="decision-kicker">THE TURNING POINT</span>
+            <h2 class="editorial-statement">
+              AN INSIGHT IS<br />
+              <span class="text-dim">NOT THE END.</span>
+            </h2>
+            <h3 class="decision-sub-prompt">
+              WHAT SHOULD WE DO?
+            </h3>
+            <p class="decision-copy">
+              FormIQ bridges the chasm between passive comprehension and tangible institutional execution.
+            </p>
+          </div>
+
+          <div class="decision-right">
+            <!-- Implementation Plan -->
+            <div class="action-plan-container">
+              <div class="plan-hierarchy-track">
+                <span>INSIGHT</span>
+                <span class="flow-dot">→</span>
+                <span>PRIORITY</span>
+                <span class="flow-dot">→</span>
+                <span>ACTION</span>
+                <span class="flow-dot">→</span>
+                <span>TIMELINE</span>
+              </div>
+
+              <div class="plan-cards-stack">
+                <div class="plan-card plan-p1">
+                  <div class="plan-card-top">
+                    <span class="p-badge">PRIORITY 01</span>
+                    <span class="p-owner">Operations & Lab Facility Team</span>
+                  </div>
+                  <h4>Improve laboratory availability</h4>
+                  <p>Extend facility access hours by 90 minutes each evening and staff dedicated lab teaching assistants.</p>
+                  <div class="p-footer">
+                    <span class="p-timeline">Timeline: 48 Hours</span>
+                    <span class="p-status">Target: Immediate Relief</span>
+                  </div>
+                </div>
+
+                <div class="plan-card plan-p2">
+                  <div class="plan-card-top">
+                    <span class="p-badge">PRIORITY 02</span>
+                    <span class="p-owner">Academic Scheduling Committee</span>
+                  </div>
+                  <h4>Optimize lab scheduling</h4>
+                  <p>De-conflict first-year core practicals from foundational lectures to prevent transit bottlenecks.</p>
+                  <div class="p-footer">
+                    <span class="p-timeline">Timeline: Week 2</span>
+                    <span class="p-status">Target: Structural Fix</span>
+                  </div>
+                </div>
+
+                <div class="plan-card plan-p3">
+                  <div class="plan-card-top">
+                    <span class="p-badge">PRIORITY 03</span>
+                    <span class="p-owner">IT Infrastructure Systems</span>
+                  </div>
+                  <h4>Increase system availability during peak sessions</h4>
+                  <p>Deploy standby terminal images and automated node balancing prior to scheduled programming classes.</p>
+                  <div class="p-footer">
+                    <span class="p-timeline">Timeline: Ongoing</span>
+                    <span class="p-status">Target: Systemic Resilience</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 08 — FORM → INTELLIGENCE → ACTION (THE PIPELINE) -->
+    <section class="scene-frame scene-08" id="scene-8" data-scene="8" data-title="PIPELINE">
+      <div class="scene-inner pipeline-inner">
+        <div class="pipeline-header">
+          <span class="scene-category-pill">THE CONTINUOUS LOOP</span>
+          <h2 class="editorial-statement">
+            FORM → INTELLIGENCE → ACTION
+          </h2>
+          <p class="pipeline-sub">
+            Drag to orbit the 3D data-flow. Hover each stage to inspect systemic telemetry.
+          </p>
+        </div>
+
+        <!-- Interactive 3D Flow Nodes Array -->
+        <div class="pipeline-spatial-nodes" id="pipeline-nodes-wrapper">
+          <div class="p-node" data-stage="form">
+            <span class="p-node-num">01</span>
+            <h3>FORM</h3>
+            <p>Natural-language intent generation</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node" data-stage="responses">
+            <span class="p-node-num">02</span>
+            <h3>RESPONSES</h3>
+            <p>Multi-channel low-latency ingestion</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node" data-stage="analysis">
+            <span class="p-node-num">03</span>
+            <h3>ANALYSIS</h3>
+            <p>Transformer NLP & semantic clustering</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node" data-stage="patterns">
+            <span class="p-node-num">04</span>
+            <h3>PATTERNS</h3>
+            <p>Cohort variance & anomaly detection</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node" data-stage="insights">
+            <span class="p-node-num">05</span>
+            <h3>INSIGHTS</h3>
+            <p>Root-cause distillation</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node" data-stage="recommendations">
+            <span class="p-node-num">06</span>
+            <h3>RECOMMENDATIONS</h3>
+            <p>Ranked tactical interventions</p>
+          </div>
+          <div class="p-node-arrow">→</div>
+
+          <div class="p-node p-node-action" data-stage="action">
+            <span class="p-node-num">07</span>
+            <h3>ACTION</h3>
+            <p>Exportable executive roadmaps</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 09 — MULTIPLE WORLDS -->
+    <section class="scene-frame scene-09" id="scene-9" data-scene="9" data-title="MULTIPLE WORLDS">
+      <div class="scene-inner worlds-inner">
+        <div class="worlds-headline-wrap">
+          <h2 class="editorial-statement">
+            ONE QUESTION ENGINE.<br />
+            <span class="text-electric">ENDLESS DECISIONS.</span>
+          </h2>
+          <p class="worlds-sub">
+            Move your cursor across environments to observe the intelligence engine adapt in real time.
+          </p>
+        </div>
+
+        <div class="worlds-quad-stage" id="worlds-stage">
+          <!-- Central FormIQ Nucleus -->
+          <div class="worlds-nucleus">
+            <span class="nucleus-symbol">◈</span>
+            <span class="nucleus-title">FORMIQ CORE</span>
+          </div>
+
+          <!-- 4 Floating World Portals -->
+          <div class="world-card w-edu" data-world="education">
+            <div class="world-tag">SECTOR 01</div>
+            <h3>EDUCATION</h3>
+            <span class="world-signal">Student feedback → institutional issues → action plan</span>
+            <p>Pinpoint curriculum bottlenecks and campus infrastructure gaps within the active term.</p>
+          </div>
+
+          <div class="world-card w-hr" data-world="hr">
+            <div class="world-tag">SECTOR 02</div>
+            <h3>HR & PEOPLE</h3>
+            <span class="world-signal">Employee responses → organizational patterns → recommendations</span>
+            <p>Isolate attrition risk and management friction before it impacts velocity.</p>
+          </div>
+
+          <div class="world-card w-research" data-world="research">
+            <div class="world-tag">SECTOR 03</div>
+            <h3>CUSTOMER RESEARCH</h3>
+            <span class="world-signal">Customer pain points → persona correlations → product decisions</span>
+            <p>Turn unstructured NPS surveys directly into prioritized backlog epics.</p>
+          </div>
+
+          <div class="world-card w-events" data-world="events">
+            <div class="world-tag">SECTOR 04</div>
+            <h3>EVENTS & SUMMITS</h3>
+            <span class="world-signal">Participant feedback → experience gaps → improvements</span>
+            <p>Execute same-day logistical iterations during ongoing conventions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 10 — TECHNOLOGY (EXPLODED 3D ARCHITECTURE) -->
+    <section class="scene-frame scene-10" id="scene-10" data-scene="10" data-title="TECHNOLOGY">
+      <div class="scene-inner tech-inner">
+        <div class="tech-header">
+          <span class="scene-category-pill">SYSTEM ARCHITECTURE</span>
+          <h2 class="editorial-statement">
+            BUILT TO BE PRACTICAL.
+          </h2>
+          <p class="tech-sub">
+            An exploded 3D system. Scroll or hover each plane to reveal the decoupled layers.
+          </p>
+        </div>
+
+        <div class="exploded-stack-stage" id="exploded-stack">
+          <!-- Layer 1 -->
+          <div class="stack-layer-row" data-layer-idx="1">
+            <div class="layer-coord">L01</div>
+            <div class="layer-main">
+              <h4>INTERFACE</h4>
+              <p>Modern responsive presentation layer with client-side reactive rendering.</p>
+            </div>
+            <div class="layer-tags"><span>HTML5 / Modern JS / WebGL</span></div>
+          </div>
+
+          <!-- Layer 2 -->
+          <div class="stack-layer-row" data-layer-idx="2">
+            <div class="layer-coord">L02</div>
+            <div class="layer-main">
+              <h4>FORM ENGINE</h4>
+              <p>Natural-language question synthesizer and dynamic questionnaire lifecycle manager.</p>
+            </div>
+            <div class="layer-tags"><span>Prompt Orchestrator</span></div>
+          </div>
+
+          <!-- Layer 3 -->
+          <div class="stack-layer-row" data-layer-idx="3">
+            <div class="layer-coord">L03</div>
+            <div class="layer-main">
+              <h4>DATA LAYER</h4>
+              <p>Structured response storage, real-time validation, schema enforcement, and CSV export.</p>
+            </div>
+            <div class="layer-tags"><span>Relational Storage / CSV</span></div>
+          </div>
+
+          <!-- Layer 4 -->
+          <div class="stack-layer-row highlight-layer" data-layer-idx="4">
+            <div class="layer-coord">L04</div>
+            <div class="layer-main">
+              <h4>AI ANALYTICS CORE</h4>
+              <p>Natural-language processing, response classification, sentiment vectors, and trend models.</p>
+            </div>
+            <div class="layer-tags"><span class="badge-electric">NLP & Clustering</span></div>
+          </div>
+
+          <!-- Layer 5 -->
+          <div class="stack-layer-row" data-layer-idx="5">
+            <div class="layer-coord">L05</div>
+            <div class="layer-main">
+              <h4>INSIGHT ENGINE</h4>
+              <p>Automated root-cause distillation, anomaly detection, and cross-cohort disparity mapping.</p>
+            </div>
+            <div class="layer-tags"><span>Pattern Synthesis</span></div>
+          </div>
+
+          <!-- Layer 6 -->
+          <div class="stack-layer-row highlight-layer" data-layer-idx="6">
+            <div class="layer-coord">L06</div>
+            <div class="layer-main">
+              <h4>ACTION ENGINE</h4>
+              <p>Ranked priority roadmap generation, executive action briefs, and implementation blueprints.</p>
+            </div>
+            <div class="layer-tags"><span class="badge-emerald">Decision Synthesis</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 11 — THE TRANSFORMATION -->
+    <section class="scene-frame scene-11" id="scene-11" data-scene="11" data-title="TRANSFORMATION">
+      <div class="scene-inner transform-inner">
+        <div class="transform-sequence-display">
+          <span class="transform-step-label" id="transform-label">RAW RESPONSES</span>
+          <div class="transform-cycle-bar">
+            <div class="cycle-pill active" data-phase="1">RAW RESPONSES</div>
+            <div class="cycle-arrow">→</div>
+            <div class="cycle-pill" data-phase="2">STRUCTURED DATA</div>
+            <div class="cycle-arrow">→</div>
+            <div class="cycle-pill" data-phase="3">UNDERSTANDING</div>
+            <div class="cycle-arrow">→</div>
+            <div class="cycle-pill" data-phase="4">DECISION</div>
+            <div class="cycle-arrow">→</div>
+            <div class="cycle-pill" data-phase="5">ACTION</div>
+          </div>
+          <p class="transform-description" id="transform-desc">
+            Scattered freeform comments flow seamlessly into structured intelligence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 12 — FINAL -->
+    <section class="scene-frame scene-12" id="scene-12" data-scene="12" data-title="DECISION">
+      <div class="scene-inner final-film-inner">
+        <div class="final-monumental-text">
+          <p class="film-line-1" id="film-line-1">
+            “FORMS SHOULD NOT END<br />
+            WITH A SPREADSHEET.”
+          </p>
+
+          <div class="film-pause-rule"></div>
+
+          <p class="film-line-2" id="film-line-2">
+            “THEY SHOULD END<br />
+            WITH A DECISION.”
+          </p>
+        </div>
+
+        <div class="film-brand-reveal" id="film-brand-reveal">
+          <h1 class="film-brand-name">FORMIQ</h1>
+          <p class="film-brand-tagline">“Every response has a story.”</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Local Script Inclusions (Completely Offline Ready) -->
+  <script src="three.min.js"></script>
+  <script src="gsap.min.js"></script>
+  <script src="ScrollTrigger.min.js"></script>
+  <script src="three-scene.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
